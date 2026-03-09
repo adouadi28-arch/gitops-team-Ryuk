@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: todo-api
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/adouadi28-arch/gitops-team-Ryuk
+    targetRevision: HEAD
+    path: apps/todo-api
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: todo-api
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
