@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/adouadi28-arch/gitops-team-Ryuk
-    targetRevision: HEAD
+    targetRevision: main
     path: apps/todo-api
   destination:
     server: https://kubernetes.default.svc
