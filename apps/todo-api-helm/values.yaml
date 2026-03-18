@@ -1,0 +1,19 @@
+replicaCount: 1
+image:
+  repository: docker.io/adouadi/todo-api
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8000
+env:
+  NODE_ENV: production
+  PORT: "8000"
+resources:
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+  limits:
+    cpu: "500m"
+    memory: "256Mi"
