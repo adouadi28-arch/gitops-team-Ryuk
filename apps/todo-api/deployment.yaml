@@ -19,7 +19,7 @@ spec:
         - name: todo-api
           image: docker.io/library/nginx:alpine
           ports:
-            - containerPort: 3000
+            - containerPort: 80
               name: http
           env:
             - name: PORT
