@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: todo-api
-  namespace: todo-api
   labels:
     app: todo-api
 spec:
@@ -17,13 +16,13 @@ spec:
     spec:
       containers:
         - name: todo-api
-          image: docker.io/library/nginx:alpine
+          image: docker.io/adouadi/todo-api:latest
           ports:
-            - containerPort: 80
+            - containerPort: 8080
               name: http
           env:
             - name: PORT
-              value: "3000"
+              value: "8080"
             - name: NODE_ENV
               value: "production"
           resources:

@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+# Référence vers la base
+bases:
+  - ../../base
+# Namespace cible pour cet overlay
+namespace: todo-api-dev
+# Labels ajoutés à toutes les ressources de cet overlay
+commonLabels:
+  environment: dev
+# Liste des patches à appliquer
+patches:
+  - path: patch-replicas.yaml
