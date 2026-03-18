@@ -18,8 +18,6 @@ spec:
       containers:
         - name: todo-api
           image: docker.io/library/nginx:alpine
-          # ⚠️ Remplacez par votre image Docker réelle
-          # Ex: image: docker.io/monuser/todo-api:v1.0.0
           ports:
             - containerPort: 3000
               name: http
