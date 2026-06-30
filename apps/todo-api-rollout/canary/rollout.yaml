@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: todo-api
-          image: ghcr.io/adouadi28-arch/todo-api-python:latest
+          image: ghcr.io/adouadi28-arch/todo-api-python:4741c347d51dc607a7a44d581f9a34e40d0c8963
           ports:
             - containerPort: 8000
               name: http
