@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: todo-api-canary
+  namespace: todo-api-canary
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: todo-api-canary
+  template:
+    metadata:
+      labels:
+        app: todo-api-canary
+    spec:
+      containers:
+        - name: todo-api
+          image: ghcr.io/adouadi28-arch/todo-api-python:latest
+          ports:
+            - containerPort: 8000
+              name: http
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause: {}        # pause manuelle — on valide avant de continuer
+        - setWeight: 50
+        - pause: {duration: 30s}
+        - setWeight: 100

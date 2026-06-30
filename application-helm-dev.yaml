@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: todo-api-helm-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/adouadi28-arch/gitops-team-Ryuk
+    targetRevision: HEAD
+    path: apps/todo-api-helm
+    helm:
+      valueFiles:
+        - values-dev.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: todo-api-helm-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

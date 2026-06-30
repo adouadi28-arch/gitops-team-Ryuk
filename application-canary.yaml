@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: todo-api-canary
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/adouadi28-arch/gitops-team-Ryuk
+    targetRevision: HEAD
+    path: apps/todo-api-rollout/canary
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: todo-api-canary
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
