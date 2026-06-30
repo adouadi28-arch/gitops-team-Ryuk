@@ -1,7 +1,7 @@
 replicaCount: 1
 image:
   repository: ghcr.io/akaclasses/todo-api-python
-  tag: latest
+  tag: 4741c347d51dc607a7a44d581f9a34e40d0c8963
   pullPolicy: IfNotPresent
 service:
   type: ClusterIP
