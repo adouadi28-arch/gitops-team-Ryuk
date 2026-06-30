@@ -1,0 +1,17 @@
+apiVersion: infra.contrib.fluxcd.io/v1alpha2
+kind: Terraform
+metadata:
+  name: todo-api-infra
+  namespace: flux-system
+spec:
+  interval: 5m
+  path: ./infrastructure/terraform
+  sourceRef:
+    kind: GitRepository
+    name: gitops-team-ryuk
+    namespace: flux-system
+  approvePlan: auto
+  storeReadablePlan: human
+  vars:
+    - name: cluster_name
+      value: docker-desktop
