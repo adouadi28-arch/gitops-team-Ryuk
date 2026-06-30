@@ -1,6 +1,6 @@
 replicaCount: 1
 image:
-  repository: docker.io/adouadi/todo-api
+  repository: ghcr.io/akaclasses/todo-api-python
   tag: latest
   pullPolicy: IfNotPresent
 service:

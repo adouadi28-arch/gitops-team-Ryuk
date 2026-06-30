@@ -1,4 +1,4 @@
 replicaCount: 2
 env:
   NODE_ENV: staging
-  PORT: "3000"
+  PORT: "8000"
