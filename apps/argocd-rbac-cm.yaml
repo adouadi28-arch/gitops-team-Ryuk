@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+  namespace: argocd
+data:
+  policy.default: role:viewer
+  policy.csv: |
+    # Rôle admin — accès total
+    p, role:admin, applications, *, */*, allow
+    p, role:admin, clusters,      get, *, allow
+    p, role:admin, repositories,  *, *, allow
+    p, role:admin, projects,      *, *, allow
+    p, role:admin, accounts,      *, *, allow
+    p, role:admin, gpgkeys,       *, *, allow
+    p, role:admin, logs,          get, */*, allow
+    p, role:admin, exec,          create, */*, allow
+
+    # Rôle developer — peut sync et voir les logs, pas de delete ni override
+    p, role:developer, applications, get,    */*, allow
+    p, role:developer, applications, sync,   */*, allow
+    p, role:developer, applications, action, */*, allow
+    p, role:developer, logs,          get,   */*, allow
+    p, role:developer, repositories,  get,   *,   allow
+
+    # Rôle viewer — lecture seule
+    p, role:viewer, applications, get, */*, allow
+    p, role:viewer, repositories, get, *,   allow
+    p, role:viewer, clusters,     get, *,   allow
+
+    # Assignation des utilisateurs aux rôles
+    g, admin, role:admin
+  scopes: '[groups]'
